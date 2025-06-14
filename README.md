@@ -28,71 +28,49 @@ php artisan key:generate
 ```
 
 
-### Autenticación (API con autenticación)
+## Configuración de autenticación
 ```bash
 composer require laravel/sanctum 
-```
-Publicando configuracion de Sanctum
-```bash
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 ```
 
 
+## Configuración de base de datos
+Edita el archivo .env con los datos de tu base de datos.
 
 
-# Configuracion de base de datos
-## Migraciones
-Tablas de modelos que utilizaremos
+## Migraciones y modelos
 
-### Tabla vehiculo
+### Crear migraciones
+
 ```bash
 php artisan make:migration create_vehicles_table
-```
-### Tabla Features
-```bash
 php artisan make:migration create_features_table
-```
-### Tabla Parts
-```bash
 php artisan make:migration create_parts_table
-```
-### Tabla Reports
-```bash
 php artisan make:migration create_reports_table
-```
-### Tabla Licenses
-```bash
 php artisan make:migration create_licenses_table
 ```
 
-Ejecutar las migraciones
-
-### 1. Crear base de datos
+### Crear migraciones
+```bash
+php artisan make:model Vehicle
+php artisan make:model Part
+php artisan make:model Feature
+php artisan make:model Report
+php artisan make:model License
+```
+### Ejecutar migraciones
 ```bash
 php artisan migrate 
 ```
-### 2. Comando para reiniciar toda la base de datos pero !Cuidado! borra todo
+⚠️ Advertencia: El siguiente comando elimina todos los datos y recrea las tablas:
+
 ```bash
 php artisan migrate:fresh
 ``` 
-# Creacion de Modelos
-### Vehicle
-```bash
-php artisan make:model Vehicle
-```
-### Part
-```bash
-php artisan make:model Part
-```
-### Feature
-```bash
-php artisan make:model Feature
-```
-### Report
-```bash
-php artisan make:model Report
-```
-### License
-```bash
-php artisan make:model License
-```
+### Comandos útiles
+php artisan migrate — Aplica las migraciones
+php artisan migrate:fresh — Reinicia la base de datos (elimina todos los datos)
+php artisan make:model <Nombre> — Crea un nuevo modelo
+php artisan make:migration <Nombre> — Crea una nueva migración
+
