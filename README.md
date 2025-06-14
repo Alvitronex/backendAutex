@@ -51,7 +51,7 @@ php artisan make:migration create_reports_table
 php artisan make:migration create_licenses_table
 ```
 
-### Crear migraciones
+### Crear modelos
 ```bash
 php artisan make:model Vehicle
 php artisan make:model Part
@@ -63,14 +63,14 @@ php artisan make:model License
 ```bash
 php artisan migrate 
 ```
-⚠️ Advertencia: El siguiente comando elimina todos los datos y recrea las tablas:
+> ⚠️ **Advertencia:** Este comando eliminará todos los datos de la base de datos.
 
 ```bash
 php artisan migrate:fresh
 ``` 
 ### Comandos útiles
-php artisan migrate — Aplica las migraciones
-php artisan migrate:fresh — Reinicia la base de datos (elimina todos los datos)
-php artisan make:model <Nombre> — Crea un nuevo modelo
-php artisan make:migration <Nombre> — Crea una nueva migración
+`php artisan migrate` — Aplica las migraciones
+`php artisan migrate:fresh` — Reinicia la base de datos (elimina todos los datos)
+`php artisan make:model <Nombre>` — Crea un nuevo modelo
+`php artisan make:migration <Nombre>` — Crea una nueva migración
 
