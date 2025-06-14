@@ -1,6 +1,6 @@
 
-## Instalar dependencias.
-# Autentificacion.
+# Instalar dependencias.
+## Autentificacion.
 [para API con authentificacion].
 ```bash
 composer require laravel/sanctum 
@@ -14,30 +14,30 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
 ## Migraciones.
 Tablas de modelos que utilizaremos.
-# Tabla vehiculo.
+### Tabla vehiculo.
 ```bash
 php artisan make:migration create_vehicles_table
 ```
-# Tabla Features.
+### Tabla Features.
 ```bash
 php artisan make:migration create_features_table
 ```
-# Tabla Parts.
+### Tabla Parts.
 ```bash
 php artisan make:migration create_parts_table
 ```
-# Tabla Reports.
+### Tabla Reports.
 ```bash
 php artisan make:migration create_reports_table
 ```
-# Tabla Licenses.
+### Tabla Licenses.
 ```bash
 php artisan make:migration create_licenses_table
 ```
 
 Unas vez creadas el script ejecutar las migraciones.
 
-#Crear base de datos.
+## Crear base de datos.
 ```bash
 php artisan migrate 
 ```
@@ -45,24 +45,24 @@ Comando para reiniciar toda la base de datos pero !Cuidado! borra todo.
 ```bash
 php artisan migrate:fresh
 ``` 
-## Creacion de Modelos
-# Vehicle
+# Creacion de Modelos
+### Vehicle
 ```bash
 php artisan make:model Vehicle
 ```
-# Part
+### Part
 ```bash
 php artisan make:model Part
 ```
-# Feature
+### Feature
 ```bash
 php artisan make:model Feature
 ```
-# Report
+### Report
 ```bash
 php artisan make:model Report
 ```
-# License
+### License
 ```bash
 php artisan make:model License
 ```
