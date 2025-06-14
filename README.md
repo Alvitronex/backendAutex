@@ -1,7 +1,32 @@
 
-# BackendAutex Setup Guide
+# BackendAutex
 
-## 1. Instalar dependencias
+BackendAutex es una API RESTful construida con Laravel para la gestión de vehículos, partes, reportes y licencias.
+
+## Índice
+
+- [Requisitos previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Configuración de autenticación](#configuración-de-autenticación)
+- [Configuración de base de datos](#configuración-de-base-de-datos)
+- [Migraciones y modelos](#migraciones-y-modelos)
+- [Comandos útiles](#comandos-útiles)
+- [Contacto](#contacto)
+
+## Requisitos previos
+
+- PHP >= 8.0
+- Composer
+- MySQL o similar
+
+## Instalación
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
 
 ### Autenticación (API con autenticación)
 ```bash
