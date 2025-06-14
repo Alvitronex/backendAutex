@@ -11,7 +11,6 @@ BackendAutex es una API RESTful construida con Laravel para la gestión de vehí
 - [Configuración de base de datos](#configuración-de-base-de-datos)
 - [Migraciones y modelos](#migraciones-y-modelos)
 - [Comandos útiles](#comandos-útiles)
-- [Contacto](#contacto)
 
 ## Requisitos previos
 
@@ -36,7 +35,7 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
 
 ## Configuración de base de datos
-Edita el archivo .env con los datos de tu base de datos.
+Edita el archivo `.env` con los datos de tu base de datos.
 
 
 ## Migraciones y modelos
