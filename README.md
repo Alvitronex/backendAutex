@@ -1,7 +1,9 @@
 
-# Instalar dependencias
-## Autentificacion
-para API con authentificacion
+# BackendAutex Setup Guide
+
+## 1. Instalar dependencias
+
+### Autenticación (API con autenticación)
 ```bash
 composer require laravel/sanctum 
 ```
@@ -10,7 +12,6 @@ Publicando configuracion de Sanctum
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 ```
 
-# Configuracion de Sanctum
 
 
 
@@ -39,13 +40,13 @@ php artisan make:migration create_reports_table
 php artisan make:migration create_licenses_table
 ```
 
--- Unas vez creadas el script ejecutar las migraciones
+Ejecutar las migraciones
 
-### Crear base de datos
+### 1. Crear base de datos
 ```bash
 php artisan migrate 
 ```
-Comando para reiniciar toda la base de datos pero !Cuidado! borra todo
+### 2. Comando para reiniciar toda la base de datos pero !Cuidado! borra todo
 ```bash
 php artisan migrate:fresh
 ``` 
