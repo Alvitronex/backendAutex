@@ -62,7 +62,7 @@ class FeatureController extends Controller
         ]);
 
         // Validar los datos de entrada si hay errores
-        if (!$validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation errors',

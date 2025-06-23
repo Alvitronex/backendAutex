@@ -103,7 +103,7 @@ class VehicleController extends Controller
             'license_plate' => 'required|string|max:20|unique:vehicles,license_plate,' . $vehicle->id,
             'make' => 'required|string|max:50',
             'model' => 'required|string|max:50',
-            'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'year' => 'required|integer|min:1900|max:' . date('Y'),
             'vehicle_type' => 'required|string|max:30',
             'status' => 'required|string|in:active,inactive',
             'color' => 'required|string|max:30',
