@@ -68,19 +68,22 @@ class VehicleController extends Controller
     // Mostrar un vehiculo especifico
     public function show(Request $request, $id)
     {
-        // Validar el ID del vehiculo
         $vehicle = Vehicle::with(['parts', 'features', 'reports', 'licenses'])
             ->byUser($request->user()->id)
             ->active()
-            ->findOrFail($id);
+            ->find($id);
 
-        // Validar si el vehiculo existe
         if (!$vehicle) {
             return response()->json([
-                'success' => true,
-                'data' => $vehicle
-            ]);
+                'success' => false,
+                'message' => 'Vehicle not found'
+            ], 404);
         }
+
+        return response()->json([
+            'success' => true,
+            'data' => $vehicle
+        ]);
     }
     // Actualizar un vehiculo especifico
     public function update(Request $request, string $id)

@@ -41,6 +41,11 @@ Route::get('/test', function () {
 // Rutas protegidas (requieren autenticación)
 Route::middleware('auth:sanctum')->group(function () {
 
+    Route::prefix('users')->group(function () {
+        Route::get('/', [AuthController::class, 'getAllUsers']);
+        Route::get('/paginated', [AuthController::class, 'getUsersPaginated']);
+        Route::get('/search', [AuthController::class, 'searchUsers']);
+    });
     // ==========================================
     // AUTENTICACIÓN
     // ==========================================
