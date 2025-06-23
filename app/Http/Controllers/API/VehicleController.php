@@ -131,7 +131,7 @@ class VehicleController extends Controller
     // Eliminar y desactivar un vehiculo especifico
     public function destroy(Request $request, $id)
     {
-        $vehicle = Vehicle::byUser(($request->user()->id)->find($id));
+        $vehicle = Vehicle::byUser($request->user()->id)->find($id);
 
         if (!$vehicle) {
             return response()->json([

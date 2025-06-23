@@ -38,7 +38,7 @@ class FeatureController extends Controller
         //feactures
         // Obtener las caracteristicas del vehiculo con el ID proporcionado 
         $features = Feature::with('vehicle')
-            ->where('vehcile_id', $vehicleId)
+            ->where('vehicle_id', $vehicleId)
             ->get();
 
         // validando la respuesta de la peticion 
