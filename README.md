@@ -73,3 +73,21 @@ php artisan migrate:fresh
 `php artisan make:model <Nombre>` — Crea un nuevo modelo
 `php artisan make:migration <Nombre>` — Crea una nueva migración
 
+## Seeders
+## Crear seeders con datos de prueba 
+`php artisan make:seeder UserSeeder`
+`php artisan make:seeder VehicleSeeder`
+`php artisan make:seeder PartSeeder` 
+`php artisan make:seeder FeatureSeeder`
+`php artisan make:seeder ReportSeeder`
+`php artisan make:seeder LicenseSeeder`
+
+## Controllers
+### Crear controladores dentro de una carpeta que llamaremos API
+`php artisan make:controller API/AuthController`
+`php artisan make:controller API/VehicleController --resource`
+`php artisan make:controller API/PartController --resource`
+`php artisan make:controller API/FeatureController --resource`
+`php artisan make:controller API/ReportController --resource`
+`php artisan make:controller API/LicenseController --resource`
+
