@@ -70,7 +70,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'messages' => 'Validation errors',
+                'message' => 'Validation errors',
                 'errors' => $validator->errors()
             ], 422);
         }
@@ -112,6 +112,84 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'data' => $request->user(),
+        ]);
+    }
+    /* Listar todos los usuarios (solo para administradores)
+     */
+    public function getAllUsers(Request $request)
+    {
+        // Opcional: Verificar si el usuario es administrador
+        // if (!$request->user()->isAdmin()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Unauthorized access'
+        //     ], 403);
+        // }
+
+        $users = User::select('id', 'username', 'name', 'email', 'address', 'phone', 'DUI', 'theme', 'created_at')
+            ->with(['vehicles:id,user_id,license_plate,make,model']) // Cargar vehículos relacionados
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $users,
+            'total' => $users->count()
+        ]);
+    }
+
+    /**
+     * Listar usuarios con paginación
+     */
+    public function getUsersPaginated(Request $request)
+    {
+        $perPage = $request->input('per_page', 10);
+        $page = $request->input('page', 1);
+
+        $users = User::select('id', 'username', 'name', 'email', 'address', 'phone', 'DUI', 'theme', 'created_at')
+            ->with(['vehicles:id,user_id,license_plate,make,model'])
+            ->paginate($perPage);
+
+        return response()->json([
+            'success' => true,
+            'data' => $users->items(),
+            'pagination' => [
+                'current_page' => $users->currentPage(),
+                'per_page' => $users->perPage(),
+                'total' => $users->total(),
+                'last_page' => $users->lastPage(),
+                'from' => $users->firstItem(),
+                'to' => $users->lastItem()
+            ]
+        ]);
+    }
+
+    /**
+     * Buscar usuarios por término
+     */
+    public function searchUsers(Request $request)
+    {
+        $searchTerm = $request->input('search', '');
+
+        if (empty($searchTerm)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Search term is required'
+            ], 422);
+        }
+
+        $users = User::select('id', 'username', 'name', 'email', 'address', 'phone', 'DUI')
+            ->where('name', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('username', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('DUI', 'LIKE', "%{$searchTerm}%")
+            ->with(['vehicles:id,user_id,license_plate,make,model'])
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $users,
+            'total' => $users->count(),
+            'search_term' => $searchTerm
         ]);
     }
 }

@@ -55,14 +55,14 @@ class FeatureController extends Controller
     {
         // Validar los datos de entrada que se cumplan las reglas de validación definidas
         $validator = Validator::make($request->all(), [
-            'vehicle_id' => 'required|exists:vehicles_id',
+            'vehicle_id' => 'required|exists:vehicles,id',
             'feature_name' => 'required|string|max:100',
             'description' => 'nullable|string',
             'is_active' => 'nullable|boolean'
         ]);
 
         // Validar los datos de entrada si hay errores
-        if (!$validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation errors',

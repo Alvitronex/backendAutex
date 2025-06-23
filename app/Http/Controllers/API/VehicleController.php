@@ -68,19 +68,22 @@ class VehicleController extends Controller
     // Mostrar un vehiculo especifico
     public function show(Request $request, $id)
     {
-        // Validar el ID del vehiculo
         $vehicle = Vehicle::with(['parts', 'features', 'reports', 'licenses'])
             ->byUser($request->user()->id)
             ->active()
-            ->findOrFail($id);
+            ->find($id);
 
-        // Validar si el vehiculo existe
         if (!$vehicle) {
             return response()->json([
-                'success' => true,
-                'data' => $vehicle
-            ]);
+                'success' => false,
+                'message' => 'Vehicle not found'
+            ], 404);
         }
+
+        return response()->json([
+            'success' => true,
+            'data' => $vehicle
+        ]);
     }
     // Actualizar un vehiculo especifico
     public function update(Request $request, string $id)
@@ -100,7 +103,7 @@ class VehicleController extends Controller
             'license_plate' => 'required|string|max:20|unique:vehicles,license_plate,' . $vehicle->id,
             'make' => 'required|string|max:50',
             'model' => 'required|string|max:50',
-            'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'year' => 'required|integer|min:1900|max:' . date('Y'),
             'vehicle_type' => 'required|string|max:30',
             'status' => 'required|string|in:active,inactive',
             'color' => 'required|string|max:30',

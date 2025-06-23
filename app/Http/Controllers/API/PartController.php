@@ -51,10 +51,10 @@ class PartController extends Controller
     {
         // Validar los datos de entrada de forma que se cumplan las reglas de validación definidas para crear una parte del vehiculo
         $validator = Validator::make($request->all(), [
-            'vehicle_id' => 'required|exists:vehicle, id',
+            'vehicle_id' => 'required|exists:vehicle,id',
             'part_name' => 'required|string|max:100',
             'part_type' => 'required|string|max:50',
-            'condition_status' => 'nullable|in:good,needs_service, needs_replacement',
+            'condition_status' => 'nullable|in:good,needs_service,needs_replacement',
             'last_service' => 'nullable|date',
             'notes' => 'nullable|string'
         ]);
@@ -190,7 +190,7 @@ class PartController extends Controller
         $userVehicleIds = Vehicle::byUser($request->user()->id)->pluck('id');
 
         $part = Part::with('vehicle')
-            ->whereIn('vehicle', $userVehicleIds)
+            ->whereIn('vehicle_id', $userVehicleIds)
             ->needsAttention()
             ->get();
 
