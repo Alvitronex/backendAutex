@@ -42,6 +42,7 @@ Route::get('/test', function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('users')->group(function () {
+        Route::get('getAllUsers', [AuthController::class, 'getAllUsers']);
         Route::get('/', [AuthController::class, 'getAllUsers']);
         Route::get('/paginated', [AuthController::class, 'getUsersPaginated']);
         Route::get('/search', [AuthController::class, 'searchUsers']);

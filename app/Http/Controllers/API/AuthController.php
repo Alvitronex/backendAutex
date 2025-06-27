@@ -42,7 +42,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'DUI' => $request->DUI,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'theme' => $request->theme ?? 'light',
         ]);
 
@@ -107,25 +107,20 @@ class AuthController extends Controller
         ]);
     }
 
+    // Obtener detalles del usuario autenticado
     public function me(Request $request)
     {
+        // Obtener el usuario autenticado
         return response()->json([
             'success' => true,
             'data' => $request->user(),
-        ]);
+        ], 200);
     }
     /* Listar todos los usuarios (solo para administradores)
      */
     public function getAllUsers(Request $request)
     {
-        // Opcional: Verificar si el usuario es administrador
-        // if (!$request->user()->isAdmin()) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Unauthorized access'
-        //     ], 403);
-        // }
-
+        // obteniendo todos los usuarios
         $users = User::select('id', 'username', 'name', 'email', 'address', 'phone', 'DUI', 'theme', 'created_at')
             ->with(['vehicles:id,user_id,license_plate,make,model']) // Cargar vehículos relacionados
             ->get();
@@ -134,7 +129,7 @@ class AuthController extends Controller
             'success' => true,
             'data' => $users,
             'total' => $users->count()
-        ]);
+        ], 200);
     }
 
     /**
@@ -160,7 +155,7 @@ class AuthController extends Controller
                 'from' => $users->firstItem(),
                 'to' => $users->lastItem()
             ]
-        ]);
+        ], 200);
     }
 
     /**
@@ -190,6 +185,6 @@ class AuthController extends Controller
             'data' => $users,
             'total' => $users->count(),
             'search_term' => $searchTerm
-        ]);
+        ], 200);
     }
 }
