@@ -72,10 +72,10 @@ php artisan migrate:fresh
 ``` 
 ### Comandos útiles
 ```bash
-`php artisan migrate` — Aplica las migraciones.
-`php artisan migrate:fresh` — Reinicia la base de datos (elimina todos los datos).
-`php artisan make:model <Nombre>` — Crea un nuevo modelo.
-`php artisan make:migration <Nombre>` — Crea una nueva migración.
+php artisan migrate
+php artisan migrate:fresh 
+php artisan make:model 
+php artisan make:migration 
 ```
 
 ## Seeders
