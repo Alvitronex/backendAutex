@@ -65,16 +65,18 @@ php artisan make:model License
 ```bash
 php artisan migrate 
 ```
-> ⚠️ **Advertencia:** Este comando eliminará todos los datos de la base de datos.
+> ⚠️ **Advertencia:** Este comando eliminará todos los datos de la base de 1datos.
 
 ```bash
 php artisan migrate:fresh
 ``` 
 ### Comandos útiles
+```bash
 `php artisan migrate` — Aplica las migraciones.
 `php artisan migrate:fresh` — Reinicia la base de datos (elimina todos los datos).
 `php artisan make:model <Nombre>` — Crea un nuevo modelo.
 `php artisan make:migration <Nombre>` — Crea una nueva migración.
+```
 
 ## Seeders
 ## Crear seeders con datos de prueba 
