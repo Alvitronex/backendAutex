@@ -20,7 +20,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:100',
             'address' => 'required|string|max:255',
             'phone' => 'nullable|string|max:8',
-            'DUI' => 'required|string|max:9|unique:users',
+            'DUI' => 'nullable|string|max:9|unique:users',
             'email' => 'required|email|max:100|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'theme' => 'nullable|string|in:light,dark,auto',

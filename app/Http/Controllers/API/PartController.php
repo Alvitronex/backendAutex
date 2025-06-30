@@ -55,7 +55,7 @@ class PartController extends Controller
             'part_name' => 'required|string|max:100',
             'part_type' => 'required|string|max:50',
             'condition_status' => 'nullable|in:good,needs_service,needs_replacement',
-            'last_service' => 'nullable|date',
+            'last_service_date' => 'nullable|date',
             'notes' => 'nullable|string'
         ]);
 
@@ -128,16 +128,16 @@ class PartController extends Controller
 
         // Validar si la parte del vehiculo existe de lo contrario retornar un error 404
         if (!$part || $part->vehicle->user_id !== $request->user()->id) {
-            return response()->json(['success' => false, 'message' => ' Part not found'], 404);
+            return response()->json(['success' => false, 'message' => ' Part not found'], 404); // Retornar un error 404 si la parte del vehiculo no existe o no pertenece al usuario autenticado
         }
 
         // Validar los datos de entrada de forma que se cumplan las reglas de validación definidas para actualizar una parte del vehiculo
         $validator = Validator::make($request->all(), [
-            'part_name' => 'required|string|max:100',
-            'part_type' => 'required|string|max:50',
-            'condition_status' => 'nullable|in:good,needs_service,needs_replacement',
-            'last_service' => 'nullable|date',
-            'notes' => 'nullable|string',
+            'part_name' => 'required|string|max:100', // Nombre de la parte del vehiculo
+            'part_type' => 'required|string|max:50', // Tipo de parte del vehiculo
+            'condition_status' => 'nullable|in:good,needs_service,needs_replacement', // Estado de la parte del vehiculo
+            'last_service_date' => 'nullable|date', // Fecha del ultimo servicio de la parte del vehiculo
+            'notes' => 'nullable|string', // Notas adicionales sobre la parte del vehiculo
         ]);
 
         // Validar los datos de entrada si hay errores que cumplan con las reglas de validación definidas

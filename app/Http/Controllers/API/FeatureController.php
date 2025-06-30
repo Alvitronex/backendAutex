@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Feature;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Validator;
 
 class FeatureController extends Controller
@@ -103,13 +102,17 @@ class FeatureController extends Controller
             ], 404);
         }
 
-        if ($feature->vehicle->user()->id !== $request->user()->id) {
+        if ($feature->vehicle->user_id !== $request->user()->id) {
             return response()->json([
                 'success' => false,
-                'message' => 'Unauthorized',
-                'data' => $feature
+                'message' => 'Unauthorized'
             ], 403);
         }
+        return response()->json([
+            'success' => true,
+            'message' => 'Feature retrieved successfully',
+            'data' => $feature
+        ]);
     }
 
     // Actualizar una caracteristica
@@ -120,7 +123,7 @@ class FeatureController extends Controller
         $feature = Feature::with('vehicle')->find($id);
 
         // Validar si la caracteristica existe de lo contrario retornar un error 404
-        if (!$feature || $feature->vehicle->user()->id !== $request->user()->id) {
+        if (!$feature || $feature->vehicle->user_id !== $request->user()->id) {
             return response()->json([
                 'success' => false,
                 'message' => 'Feature not found',
@@ -162,7 +165,7 @@ class FeatureController extends Controller
     {
         $feature = Feature::with('vehicle')->find($id);
 
-        if (!$feature || $feature->vehicle->user()->id !== $request->user()->id) {
+        if (!$feature || $feature->vehicle->user_id !== $request->user()->id) {
             return response()->json([
                 'success' => false,
                 'message' => 'Feature not found',
@@ -182,7 +185,7 @@ class FeatureController extends Controller
     {
         $feature = Feature::with('vehicle')->find($id);
 
-        if (!$feature || $feature->vehicle->user()->id !== $request->user()->id) {
+        if (!$feature || $feature->vehicle->user_id !== $request->user()->id) {
             return response()->json([
                 'success' => false,
                 'message' => 'Feature not found',

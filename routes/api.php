@@ -25,16 +25,7 @@ Route::prefix('auth')->group(function () {
 Route::get('/test', function () {
     return response()->json([
         'message' => 'Autex API is working!',
-        'version' => '1.0.0',
         'timestamp' => now(),
-        'endpoints' => [
-            'auth' => '/api/auth/*',
-            'vehicles' => '/api/vehicles',
-            'parts' => '/api/parts',
-            'features' => '/api/features',
-            'reports' => '/api/reports',
-            'licenses' => '/api/licenses',
-        ]
     ]);
 });
 
@@ -42,7 +33,6 @@ Route::get('/test', function () {
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('users')->group(function () {
-        Route::get('getAllUsers', [AuthController::class, 'getAllUsers']);
         Route::get('/', [AuthController::class, 'getAllUsers']);
         Route::get('/paginated', [AuthController::class, 'getUsersPaginated']);
         Route::get('/search', [AuthController::class, 'searchUsers']);
@@ -53,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('me', [AuthController::class, 'me']);
+        Route::get('getAllUsers', [AuthController::class, 'getAllUsers']);
     });
 
     // ==========================================

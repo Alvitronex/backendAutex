@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
-use HasFactory;
+    use HasFactory;
     protected $fillable = [
         'vehicle_id', // ID del vehículo al que pertenece la pieza
         'part_name', // Nombre de la pieza
@@ -23,15 +24,15 @@ use HasFactory;
     // Relación con el modelo Vehicle
     public function vehicle()
     {
-        return $this->belongsTo(Vehicle::class); 
+        return $this->belongsTo(Vehicle::class);
     }
     // Scopes para filtrar las piezas
     public function scopeNeedsAttention($query)
     {
-        return $query->whereIn('condition_status', ['needs_service', 'needs_replacement']);     
+        return $query->whereIn('condition_status', ['needs_service', 'needs_replacement']);
     }
-    public function scopeByCondition($query, $condition) 
-    { 
-        return $this->orderBy('condition_status', $condition);  
+    public function scopeByCondition($query, $condition)
+    {
+        return $query->where('condition_status', $condition);
     }
 }

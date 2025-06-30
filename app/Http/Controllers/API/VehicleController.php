@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vehicle;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,10 +24,9 @@ class VehicleController extends Controller
     // Crear nuevo vehiculo 
     public function store(Request $request)
     {
-        // Validar los datos de entrada de forma
-        // que se cumplan las reglas de validación definidas
+        // Validar los datos de entrada de forma que se cumplan las reglas de validación definidas
         $validator = Validator::make($request->all(), [
-            'license_plate' => 'required|string |max:20|unique:vehicles',
+            'license_plate' => 'required|string|max:20|unique:vehicles',
             'make' => 'required|string|max:50',
             'model' => 'required|string|max:50',
             'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
@@ -36,7 +34,7 @@ class VehicleController extends Controller
             //'status' => 'required|string|in:active,inactive',
             'color' => 'required|string|max:30',
             'registration_date' => 'required|date',
-        ]);
+        ],);
 
         // Validar los datos de entrada si hay errores
         if ($validator->fails()) {
@@ -57,7 +55,7 @@ class VehicleController extends Controller
             'color' => $request->color,
             //'status' => $request->status ?? 'active',
             'registration_date' => $request->registration_date,
-        ]);
+        ],);
         // Verificar si el vehiculo se ha creado correctamente
         return response()->json([
             'success' => true,
