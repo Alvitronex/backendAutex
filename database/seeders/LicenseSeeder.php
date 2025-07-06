@@ -10,9 +10,11 @@ class LicenseSeeder extends Seeder
 {
     public function run()
     {
-        $vehicle1 = Vehicle::where('license_plate', 'ABC-123')->first();
+        // Asegurarse de que los vehículos existen antes de crear las licencias
+        $vehicle1 = Vehicle::where('license_plate', 'ABC-123')->first(); 
         $vehicle2 = Vehicle::where('license_plate', 'XYZ-789')->first();
         $vehicle3 = Vehicle::where('license_plate', 'TEST-001')->first();
+
 
         // Licencias para Toyota Corolla
         License::create([

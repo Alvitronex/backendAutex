@@ -45,6 +45,7 @@ class License extends Model
         return $this->expiry_date < now(); // Verifica si la licencia está expirada
     }
 
+    // Accesor para obtener el estado de la licencia
     public function getDaysUntilExpiryAttribute()
     {
         return $this->expiry_date->diffInDays(now(), false); // Calcula los días restantes hasta el vencimiento

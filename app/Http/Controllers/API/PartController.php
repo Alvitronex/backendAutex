@@ -199,6 +199,7 @@ class PartController extends Controller
             'data' => $part
         ]);
     }
+    
     public function create() {}
     public function edit(string $id) {}
 }

@@ -31,8 +31,8 @@ class Part extends Model
     {
         return $query->whereIn('condition_status', ['needs_service', 'needs_replacement']);
     }
-    public function scopeByCondition($query, $condition)
-    {
-        return $query->where('condition_status', $condition);
-    }
+    // public function scopeByCondition($query, $condition)
+    // {
+    //     return $query->where('condition_status', $condition);
+    // }
 }

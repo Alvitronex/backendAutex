@@ -208,9 +208,11 @@ class LicenseController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
+            'license_type' => 'required|string|max:50',
             'license_number' => 'required|string|max:50',
             'issue_date' => 'required|date',
             'expiry_date' => 'required|date|after:issue_date',
+
         ]);
 
         if ($validator->fails()) {
@@ -223,21 +225,30 @@ class LicenseController extends Controller
 
         // Marcar la licencia anterior como expirada
         $license->update(['status' => 'expired']);
-
-        // Crear nueva licencia
+        // Verificar que el número de licencia es único
+        // if (License::where('license_number', $request->license_number)
+        //     ->where('vehicle_id', $license->vehicle_id)
+        //     ->exists()
+        // ) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'License number must be unique for the vehicle'
+        //     ], 422);
+        // }
+        // Crear una nueva licencia con los datos proporcionados
         $newLicense = License::create([
             'vehicle_id' => $license->vehicle_id,
-            'license_type' => $license->license_type,
+            'license_type' => $request->license_type,
             'license_number' => $request->license_number,
             'issue_date' => $request->issue_date,
             'expiry_date' => $request->expiry_date,
-            'status' => 'valid',
+            'status' => 'valid', // Nueva licencia siempre es válida al momento de crearla
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'License renewed successfully',
             'data' => $newLicense->load('vehicle')
-        ], 201);
+        ]);
     }
 }

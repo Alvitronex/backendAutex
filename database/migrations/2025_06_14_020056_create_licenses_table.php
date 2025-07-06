@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vehicle_id')->constrained()->onDelete('cascade'); // llave foránea para relacionar la licencia con un vehículo
             $table->string('license_type'); // Tipo de licencia (e.j., particular, liviana, pesada, pesada T)
-            $table->string('license_number'); // Número de licencia, debe ser único
+            $table->string('license_number')->unique(); // Número de licencia, debe ser único
             $table->date('issue_date'); // Fecha de emisión de la licencia
             $table->date('expiry_date'); // Fecha de vencimiento de la licencia
             $table->enum('status', ['valid', 'expired'])->default('valid'); // Estado de la licencia, puede ser válida o expirada, por defecto es válida
